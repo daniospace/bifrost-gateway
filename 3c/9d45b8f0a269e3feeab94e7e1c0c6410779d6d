@@ -1,0 +1,22 @@
+frontend/app/migration/page.tsx
+  s_fa997fbd4b149e::t_84f86a8f84d6ae 41-53,57
+  s_fa997fbd4b149e::t_df07c97bb2fca5 90-100,104
+backend/main.go
+  s_fa997fbd4b149e::t_9e8c23bf54904c 153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "3c9d45b8f0a269e3feeab94e7e1c0c6410779d6d",
+  "prompts": {},
+  "sessions": {
+    "s_fa997fbd4b149e": {
+      "agent_id": {
+        "tool": "gemini",
+        "id": "be536f39-95e0-4ae1-aabe-17ba84cb11b2",
+        "model": "gemini-3.5-flash"
+      },
+      "human_author": "daniospace <daniospace@users.noreply.github.com>"
+    }
+  }
+}
