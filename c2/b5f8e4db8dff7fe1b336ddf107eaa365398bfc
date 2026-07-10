@@ -1,0 +1,64 @@
+charts/aurallm/templates/_helpers.tpl
+  h_d9442f917ff202 1-84
+charts/aurallm/templates/ingress.yaml
+  h_d9442f917ff202 1-35
+docs/mint.json
+  s_fa997fbd4b149e::t_a6310d497cd181 34
+.github/workflows/frontend-ci.yml
+  h_d9442f917ff202 1-23
+backend/Dockerfile
+  h_d9442f917ff202 1-21
+charts/aurallm/Chart.yaml
+  h_d9442f917ff202 1-17
+charts/aurallm/templates/configmap.yaml
+  h_d9442f917ff202 1-9
+charts/aurallm/templates/deployment.yaml
+  h_d9442f917ff202 1-64
+.gitignore
+  h_d9442f917ff202 10
+charts/aurallm/templates/NOTES.txt
+  h_d9442f917ff202 1-28
+charts/aurallm/templates/hpa.yaml
+  h_d9442f917ff202 1-28
+docs/features/pii-redaction.mdx
+  s_fa997fbd4b149e::t_4cb6e9dad2ca44 45
+backend/internal/alert/alert.go
+  s_fa997fbd4b149e::t_edb824743cc257 39,45
+.github/workflows/release.yml
+  h_d9442f917ff202 1-39
+charts/aurallm/templates/serviceaccount.yaml
+  h_d9442f917ff202 1-12
+charts/aurallm/templates/secret.yaml
+  h_d9442f917ff202 1-14
+.github/workflows/backend-ci.yml
+  h_d9442f917ff202 1-42
+README.md
+  s_fa997fbd4b149e::t_c252cf704cbc33 109
+charts/aurallm/values.yaml
+  h_d9442f917ff202 1-106
+backend/internal/proxy/scrubber_test.go
+  s_fa997fbd4b149e::t_21c3f16aa084d8 20
+charts/aurallm/templates/service.yaml
+  h_d9442f917ff202 1-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "c2b5f8e4db8dff7fe1b336ddf107eaa365398bfc",
+  "prompts": {},
+  "humans": {
+    "h_d9442f917ff202": {
+      "author": "daniospace <daniospace@users.noreply.github.com>"
+    }
+  },
+  "sessions": {
+    "s_fa997fbd4b149e": {
+      "agent_id": {
+        "tool": "gemini",
+        "id": "be536f39-95e0-4ae1-aabe-17ba84cb11b2",
+        "model": "gemini-3.5-flash"
+      },
+      "human_author": "daniospace <daniospace@users.noreply.github.com>"
+    }
+  }
+}
