@@ -1,0 +1,106 @@
+replicaCount: 1
+
+image:
+  repository: aurallm/aurallm
+  pullPolicy: IfNotPresent
+  tag: ""  # defaults to Chart.appVersion
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8085
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: aurallm.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+config:
+  port: "8085"
+  logLevel: "info"
+
+# Database — use built-in postgres or bring your own
+postgresql:
+  enabled: true
+  auth:
+    username: postgres
+    password: postgres
+    database: gateway
+  primary:
+    persistence:
+      enabled: true
+      size: 10Gi
+
+# If postgresql.enabled=false, set this
+externalDatabase:
+  url: ""  # postgres://user:pass@host:5432/gateway?sslmode=disable
+
+# Optional: Redis for distributed rate limiting
+redis:
+  enabled: false
+  auth:
+    enabled: false
+
+externalRedis:
+  url: ""  # redis://host:6379/0
+
+# Extra env vars (e.g. provider API keys injected via secret)
+extraEnv: []
+# - name: OPENAI_API_KEY
+#   valueFrom:
+#     secretKeyRef:
+#       name: aurallm-secrets
+#       key: openai-api-key
+
+# Reference an existing secret instead of hardcoding values
+existingSecret: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8085
+  initialDelaySeconds: 10
+  periodSeconds: 15
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8085
+  initialDelaySeconds: 5
+  periodSeconds: 10
