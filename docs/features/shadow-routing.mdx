@@ -7,6 +7,35 @@ Migrating from expensive models (like GPT-4o) to cheaper alternatives (like Clau
 
 AuraLLM solves this through **Shadow Parallel Routing**.
 
+## Non-Blocking Parallel Sequence
+
+Our shadow replication runs completely asynchronously in background threads. Below is the interactive **Mermaid.js** flowchart mapping the complete sequence:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Client Application
+    participant Proxy as AuraLLM Gateway
+    participant Primary as Primary LLM (OpenAI)
+    participant Shadow as Shadow LLM (Claude)
+    participant DB as Postgres Database
+
+    App->>Proxy: POST /v1/chat/completions (Header: X-Shadow-Model: claude-3-5-sonnet)
+    Proxy->>Primary: Forward original prompt immediately
+    Primary-->>Proxy: Return output (GPT-4o response)
+    Proxy-->>App: Stream response back to client instantly (Zero Added Latency)
+    
+    Note over Proxy: Fire non-blocking background thread
+    rect rgb(6, 78, 59)
+        Proxy->>Shadow: Clone body and forward with shadow model
+        Shadow-->>Proxy: Return output (Claude response)
+        Proxy->>Proxy: Calculate shadow token costs and latency
+        Proxy->>DB: Log paired metrics (primary_log_id = parent_id)
+    end
+```
+
+---
+
 ## Side-By-Side Production Audits
 
 By appending a standard header to your outgoing requests, AuraLLM duplicates production calls to a second "shadow" model in a separate non-blocking thread:

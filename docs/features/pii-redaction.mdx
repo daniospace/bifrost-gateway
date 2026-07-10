@@ -7,6 +7,33 @@ Corporate security policies often conflict with developer productivity. Employee
 
 AuraLLM enforces zero-friction, private sanitization locally on your servers before any data is sent upstream.
 
+## Interactive Redaction Lifecycle
+
+Watch the exact sequence of how AuraLLM processes a prompt, hashes high-risk secrets, contacts OpenAI, and securely restores the values on-the-fly inside your client connection:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor App as Client Application
+    participant Proxy as AuraLLM Scrubber
+    participant DB as Postgres/Redis
+    participant OpenAI as Public OpenAI API
+
+    App->>Proxy: POST /v1/chat/completions (Has SSN / Credit Card)
+    Note over Proxy: Run high-speed Regex Scrubber
+    Proxy->>Proxy: 1. SSN replaced with [REDACTED_SSN_1]
+    Proxy->>Proxy: 2. Save original values in local request memory
+    Proxy->>OpenAI: Forward Sanitized Prompt (100% compliant)
+    Note over OpenAI: Process prompt using safe placeholders
+    OpenAI-->>Proxy: Return Completion: "Email draft to [REDACTED_SSN_1]..."
+    Note over Proxy: Match placeholders and re-inject original values
+    Proxy->>Proxy: Re-inject "123-45-6789" back into the text
+    Proxy->>DB: Asynchronously Log leak count to audit trail
+    Proxy-->>App: Return finished text with original credentials!
+```
+
+---
+
 ## Local Compiled Regex Scrubber
 
 When a prompt is sent through AuraLLM, the gateway intercepts the messages and scrubs four major sensitive records using fast, pre-compiled Go regular expressions:
@@ -17,13 +44,6 @@ When a prompt is sent through AuraLLM, the gateway intercepts the messages and s
 | **Credit Cards** | `4111-2222-3333-4444` | `[REDACTED_CARD_k]` |
 | **Email Addresses** | `support@bifrost.ai` | `[REDACTED_EMAIL_k]` |
 | **Secrets & API Keys** | `sk-proj-abcde...` | `[REDACTED_SECRET_k]` |
-
-```
-1. Developer Prompt (Sensitive)  ────► [AuraLLM Local Scrubber] ──► 2. Sanitize and replace placeholders
-                                                                             │
-                                                                             ▼
-4. Return Original Content  ◄──── [Re-Inject Sensitive Data] ◄─── 3. Upsream Safe Prompt to OpenAI
-```
 
 ### Auto Re-injection (Un-redaction)
 For standard responses, when the upstream LLM returns a response referencing those placeholders, AuraLLM **automatically re-injects the original sensitive data back into the text** on-the-fly. 
