@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bifrost Enterprise Console",
-  description: "Bifrost: The Cloud-Native, FinOps-Enforced AI Gateway Console",
+  title: "AuraLLM Enterprise Console",
+  description: "AuraLLM: The Cloud-Native, FinOps-Enforced AI Gateway Console",
 };
 
 export default function RootLayout({

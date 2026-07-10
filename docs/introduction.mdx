@@ -1,22 +1,22 @@
 ---
-title: Welcome to Bifrost
-description: "Bifrost: The Cloud-Native, FinOps-Enforced AI Gateway"
+title: Welcome to AuraLLM
+description: "AuraLLM: The Cloud-Native, FinOps-Enforced AI Gateway"
 ---
 
-Bifrost is a highly performant, commercial-grade AI Gateway written in Go. It serves as an secure, lightweight bridge connecting your developers' standard OpenAI codebases to any downstream LLM provider (OpenAI, Anthropic, Gemini, DeepSeek, LLaMA, etc.) while enforcing **real-time budget limits, local PII sanitization, and automated model migration audits** on-the-fly.
+AuraLLM is a highly performant, commercial-grade AI Gateway written in Go. It serves as an secure, lightweight bridge connecting your developers' standard OpenAI codebases to any downstream LLM provider (OpenAI, Anthropic, Gemini, DeepSeek, LLaMA, etc.) while enforcing **real-time budget limits, local PII sanitization, and automated model migration audits** on-the-fly.
 
-```python Python (From standard OpenAI Client to Bifrost in 2 lines!)
+```python Python (From standard OpenAI Client to AuraLLM in 2 lines!)
 import openai
 
 client = openai.OpenAI(
     api_key="gw-team-key-your-secret-here", 
-    base_url="https://bifrost.yourcompany.com/v1" # Simply swap URL to get strict budget caps!
+    base_url="https://gateway.yourcompany.com/v1" # Simply swap URL to get strict budget caps!
 )
 ```
 
-## ⚡ Why Mid-Sized Teams Choose Bifrost
+## ⚡ Why Mid-Sized Teams Choose AuraLLM
 
-Mid-sized engineering organizations (100 to 1,000 employees) adopt Bifrost to satisfy budget predictability and private data compliance without the overhead of heavy enterprise security middleware:
+Mid-sized engineering organizations (100 to 1,000 employees) adopt AuraLLM to satisfy budget predictability and private data compliance without the overhead of heavy enterprise security middleware:
 
 *   **Distributed Budget caps:** Atomic budget deduction synchronized globally across your clusters using a distributed **Redis Cache**.
 *   **Shadow Routing (Migration Auditor):** Duplicate live production prompts in background goroutines to test cheaper models side-by-side with zero reliability risk.
@@ -27,8 +27,8 @@ Mid-sized engineering organizations (100 to 1,000 employees) adopt Bifrost to sa
 
 ## 🛠️ Performance & Overhead
 
-Because Bifrost is built in Go, it features near-zero overhead under high-concurrency mid-market workloads:
+Because AuraLLM is built in Go, it features near-zero overhead under high-concurrency mid-market workloads:
 
 *   **RAM Footprint:** ~15MB at idle.
-*   **Startup Latency:** <10ms.
+*   **Startup Latency:** less than 10ms.
 *   **Edge deployment:** Runs as a lightweight, zero-dependency 20MB Docker container or Kubernetes sidecar.

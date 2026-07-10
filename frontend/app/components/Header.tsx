@@ -20,18 +20,18 @@ export default function Header() {
       <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "1rem 1.5rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <div style={{
-            background: "linear-gradient(135deg, var(--primary) 0%, #a855f7 100%)",
+            background: "linear-gradient(135deg, var(--primary) 0%, #059669 100%)",
             color: "#ffffff",
             padding: "0.4rem 0.6rem",
             borderRadius: "0.5rem",
             fontWeight: "bold",
             fontSize: "1.1rem",
-            boxShadow: "0 2px 4px rgba(79, 70, 229, 0.25)"
+            boxShadow: "0 2px 8px rgba(16, 185, 129, 0.25)"
           }}>
-            🌉
+            🟢
           </div>
-          <span style={{ fontWeight: 700, fontSize: "1.25rem", background: "linear-gradient(to right, var(--primary), #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            Bifrost
+          <span style={{ fontWeight: 700, fontSize: "1.25rem", background: "linear-gradient(to right, var(--primary), #34d399)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            AuraLLM
           </span>
           <span style={{ fontSize: "0.75rem", padding: "0.1rem 0.4rem", background: "var(--primary-light)", color: "var(--primary)", borderRadius: "1rem", fontWeight: 600 }}>
             Enterprise

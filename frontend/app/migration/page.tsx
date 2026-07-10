@@ -254,7 +254,7 @@ export default function MigrationAuditorPage() {
     <div className="container">
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <div>
-          <h1 style={{ fontSize: "1.75rem", fontWeight: 700 }}>Bifrost Migration Auditor</h1>
+          <h1 style={{ fontSize: "1.75rem", fontWeight: 700 }}>AuraLLM Migration Auditor</h1>
           <p style={{ color: "var(--secondary)", fontSize: "0.875rem" }}>
             Real-time shadow-routing analysis to compare cost, speed, and tokens side-by-side with production models.
           </p>

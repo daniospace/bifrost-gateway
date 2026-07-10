@@ -1,14 +1,14 @@
-# 🌉 Bifrost: The Cloud-Native, FinOps-Enforced AI Gateway
+# 🟢 AuraLLM: The Cloud-Native, FinOps-Enforced AI Gateway
 
-Bifrost is a highly extensible, commercial-grade AI Gateway designed as a performant, developer-friendly alternative to solutions like LiteLLM. Written in Go for raw concurrency and effortless platform extensibility, Bifrost serves as a secure bridge connecting your developers' standard OpenAI codebases to multiple downstream LLM providers (OpenAI, Anthropic, Gemini, DeepSeek, etc.) while enforcing **real-time token limits, budget controls, and cost auditing**.
+AuraLLM is a highly extensible, commercial-grade AI Gateway designed as a performant, developer-friendly alternative to solutions like LiteLLM. Written in Go for raw concurrency and effortless platform extensibility, AuraLLM serves as a secure bridge connecting your developers' standard OpenAI codebases to multiple downstream LLM providers (OpenAI, Anthropic, Gemini, DeepSeek, etc.) while enforcing **real-time token limits, budget controls, and cost auditing**.
 
 ---
 
-## 🚀 Why Bifrost beats LiteLLM
+## 🚀 Why AuraLLM beats LiteLLM
 
-1. **DevOps & Cloud-Native Native (Go vs. Python/Rust):** Unlike LiteLLM (written in Python), Bifrost has absolute zero runtime overhead, starting in under 10ms with a tiny ~15MB memory footprint. Unlike Rust gateways, Bifrost exposes clean, idiomatic Go interfaces, allowing enterprise platform teams to easily write custom middleware (PII scrubbers, proprietary auth, custom prompt guards) in hours, not weeks.
-2. **Unified Single-Binary Deployments:** Bifrost compiles down into a single, self-contained executable (~20MB) that embeds its entire administration dashboard. You can distribute Bifrost as a zero-dependency service or Kubernetes sidecar.
-3. **Reactive Real-Time Budget Enforcement:** Bifrost intercepts incoming request payloads and Server-Sent Events (SSE) stream lines in real-time, parsing token usage on-the-fly and atomically deducting costs from an in-memory cache to guarantee budget limits are never exceeded.
+1. **DevOps & Cloud-Native Native (Go vs. Python/Rust):** Unlike LiteLLM (written in Python), AuraLLM has absolute zero runtime overhead, starting in under 10ms with a tiny ~15MB memory footprint. Unlike Rust gateways, AuraLLM exposes clean, idiomatic Go interfaces, allowing enterprise platform teams to easily write custom middleware (PII scrubbers, proprietary auth, custom prompt guards) in hours, not weeks.
+2. **Unified Single-Binary Deployments:** AuraLLM compiles down into a single, self-contained executable (~20MB) that embeds its entire administration dashboard. You can distribute AuraLLM as a zero-dependency service or Kubernetes sidecar.
+3. **Reactive Real-Time Budget Enforcement:** AuraLLM intercepts incoming request payloads and Server-Sent Events (SSE) stream lines in real-time, parsing token usage on-the-fly and atomically deducting costs from an in-memory cache to guarantee budget limits are never exceeded.
 4. **Executive FinOps Console:** A premium, styled slate-indigo Next.js dashboard built for Engineering and Financial Managers featuring month-to-date spend accumulation, 30-day forecasting trendlines, budget-at-risk alarms, and team onboarding.
 
 ---
@@ -16,13 +16,13 @@ Bifrost is a highly extensible, commercial-grade AI Gateway designed as a perfor
 ## ⚡ Killer Enterprise Features (Where LiteLLM Falls Short)
 
 ### 1. 🌉 Shadow Parallel Routing (Migration Auditor)
-Bifrost allows you to test cheaper, specialized, or open-source models with live production traffic without any latency or reliability risk.
-*   **How it works:** When a client request is sent with the header `X-Shadow-Model: claude-3-5-sonnet`, Bifrost resolves the primary request (e.g., `gpt-4o`) instantly to keep production latency at absolute zero. In the background, a non-blocking goroutine duplicates the prompt, queries the shadow model, and records side-by-side cost, token, and latency metrics.
+AuraLLM allows you to test cheaper, specialized, or open-source models with live production traffic without any latency or reliability risk.
+*   **How it works:** When a client request is sent with the header `X-Shadow-Model: claude-3-5-sonnet`, AuraLLM resolves the primary request (e.g., `gpt-4o`) instantly to keep production latency at absolute zero. In the background, a non-blocking goroutine duplicates the prompt, queries the shadow model, and records side-by-side cost, token, and latency metrics.
 *   **The Benefit:** CTOs get 100% data-driven, side-by-side comparison tables showing exactly what production traffic would cost and look like under a cheaper model, removing all friction from migration decisions.
 
 ### 🛡️ 2. Local PII & Secrets Redaction Guard
-Bifrost intercepts prompts and sanitizes sensitive records locally on your private network before they ever reach public cloud LLM servers.
-*   **How it works:** Bifrost uses compiled Go regex to scrub high-risk patterns—such as **Social Security Numbers (SSNs)**, **Credit Card numbers**, **email addresses**, and **API keys/Secrets**—replacing them with safe placeholders (e.g., `[REDACTED_SSN_1]`). For non-streaming responses, it automatically un-redacts (re-injects) original values on-the-fly.
+AuraLLM intercepts prompts and sanitizes sensitive records locally on your private network before they ever reach public cloud LLM servers.
+*   **How it works:** AuraLLM uses compiled Go regex to scrub high-risk patterns—such as **Social Security Numbers (SSNs)**, **Credit Card numbers**, **email addresses**, and **API keys/Secrets**—replacing them with safe placeholders (e.g., `[REDACTED_SSN_1]`). For non-streaming responses, it automatically un-redacts (re-injects) original values on-the-fly.
 *   **The Benefit:** Full, frictionless SOC2, HIPAA, and GDPR compliance out-of-the-box. Developers write zero custom security code, while compliance teams track blocked leaks via the dashboard.
 
 ---
@@ -40,13 +40,14 @@ Bifrost intercepts prompts and sanitizes sensitive records locally on your priva
 ### 1. Launch the Database
 Start the pre-configured PostgreSQL database on port `5435`:
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 ### 2. Configure the Environment
 An `.env` file has been generated in the root directory:
 ```env
 DATABASE_URL=postgres://postgres:postgres@localhost:5435/gateway?sslmode=disable
+REDIS_URL=redis://localhost:6379/0
 PORT=8085
 ```
 
@@ -61,7 +62,7 @@ Running separate services is recommended during active development for live hot-
 cd backend
 go run main.go
 ```
-*Bifrost will automatically load `.env` parameters and start on port `8085`.*
+*AuraLLM will automatically load `.env` parameters and start on port `8085`.*
 
 #### Start the Next.js Dev Console
 ```bash
@@ -74,7 +75,7 @@ npm run dev
 
 ## 📦 Production Workflow (Unified Single Binary)
 
-To build and compile Bifrost into a single executable serving both the dashboard and the proxy APIs:
+To build and compile AuraLLM into a single executable serving both the dashboard and the proxy APIs:
 
 #### 1. Compile Next.js to Static Assets
 ```bash
@@ -102,7 +103,7 @@ go build -o gateway main.go
 
 ## 🔒 Enterprise Gateway API Schema
 
-Developers access multi-provider models through Bifrost by changing their client headers to point to the gateway:
+Developers access multi-provider models through AuraLLM by changing their client headers to point to the gateway:
 
 ### Endpoint: `POST /v1/chat/completions`
 *   **Auth Header:** `Authorization: Bearer <your_bifrost_team_key>`

@@ -153,7 +153,7 @@ func main() {
 		port = "8085"
 	}
 
-	log.Printf("Bifrost AI Gateway starting on port %s...", port)
+	log.Printf("AuraLLM AI Gateway starting on port %s...", port)
 	if err := http.ListenAndServe(":"+port, LoggingMiddleware(mux)); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}

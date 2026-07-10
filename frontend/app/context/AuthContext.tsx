@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Check local storage for persistent session
-    const storedUser = localStorage.getItem("bifrost_session");
+    const storedUser = localStorage.getItem("aurallm_session");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -54,20 +54,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     setUser(newUser);
-    localStorage.setItem("bifrost_session", JSON.stringify(newUser));
+    localStorage.setItem("aurallm_session", JSON.stringify(newUser));
     setLoading(false);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("bifrost_session");
+    localStorage.removeItem("aurallm_session");
   };
 
   const switchRole = (newRole: string) => {
     if (!user) return;
     const updatedUser = { ...user, role: newRole };
     setUser(updatedUser);
-    localStorage.setItem("bifrost_session", JSON.stringify(updatedUser));
+    localStorage.setItem("aurallm_session", JSON.stringify(updatedUser));
   };
 
   return (

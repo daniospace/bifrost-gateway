@@ -5,11 +5,11 @@ description: "Auditing alternative cheaper models in production with zero risk"
 
 Migrating from expensive models (like GPT-4o) to cheaper alternatives (like Claude Haiku, LLaMA, or DeepSeek) is mathematically appealing but operationally terrifying. Teams fear degradations in quality or latency. 
 
-Bifrost solves this through **Shadow Parallel Routing**.
+AuraLLM solves this through **Shadow Parallel Routing**.
 
 ## Side-By-Side Production Audits
 
-By appending a standard header to your outgoing requests, Bifrost duplicates production calls to a second "shadow" model in a separate non-blocking thread:
+By appending a standard header to your outgoing requests, AuraLLM duplicates production calls to a second "shadow" model in a separate non-blocking thread:
 
 ### Request Header
 ```http
@@ -18,7 +18,7 @@ X-Shadow-Model: claude-3-5-sonnet
 
 ### The Pipeline Sequence
 ```
-1. Client Call  ─────────► [Bifrost Gateway]
+1. Client Call  ─────────► [AuraLLM Gateway]
                               │
                               ├──► Serve Primary (GPT-4o) ──► Client (Zero Added Latency)
                               │
@@ -29,6 +29,6 @@ X-Shadow-Model: claude-3-5-sonnet
 ```
 
 1.  **Direct Delivery:** The client's primary model request (e.g., `gpt-4o`) is handled and returned instantly. The user gets their reply with **zero added latency**.
-2.  **Background Thread:** In a separate, non-blocking goroutine, Bifrost clones the prompt payload, overrides the target model to your designated shadow model, and makes a standard background request.
+2.  **Background Thread:** In a separate, non-blocking goroutine, AuraLLM clones the prompt payload, overrides the target model to your designated shadow model, and makes a standard background request.
 3.  **No-Cost Audit:** The shadow call cost, token usage, and latency are recorded in Postgres but **never deducted from the client's budget limit**.
-4.  **Quantitative Comparison:** Administrators review cost and speed comparisons side-by-side in the **Bifrost Migration Auditor Console**, proving exactly how much money can be saved before making any permanent changes to the code.
+4.  **Quantitative Comparison:** Administrators review cost and speed comparisons side-by-side in the **AuraLLM Migration Auditor Console**, proving exactly how much money can be saved before making any permanent changes to the code.

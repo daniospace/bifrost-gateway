@@ -43,7 +43,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           }
         `}</style>
         <span style={{ fontSize: "0.875rem", color: "var(--secondary)", fontWeight: 500 }}>
-          Securing Bifrost OIDC Handshake...
+          Securing AuraLLM OIDC Handshake...
         </span>
       </div>
     );
@@ -56,26 +56,26 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)",
+        background: "linear-gradient(135deg, #000000 0%, #022c22 100%)",
         padding: "1.5rem"
       }}>
-        <div className="card" style={{ maxWidth: "420px", width: "100%", padding: "2.5rem", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(30, 41, 59, 0.7)", backdropFilter: "blur(12px)", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3)" }}>
+        <div className="card" style={{ maxWidth: "420px", width: "100%", padding: "2.5rem", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(10, 10, 10, 0.8)", backdropFilter: "blur(12px)", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)" }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.5rem", marginBottom: "2rem" }}>
             <div style={{
-              background: "linear-gradient(135deg, var(--primary) 0%, #a855f7 100%)",
+              background: "linear-gradient(135deg, var(--primary) 0%, #059669 100%)",
               color: "#ffffff",
               padding: "0.6rem 0.8rem",
               borderRadius: "0.75rem",
               fontWeight: "bold",
               fontSize: "1.75rem",
-              boxShadow: "0 4px 12px rgba(79, 70, 229, 0.4)"
+              boxShadow: "0 4px 12px rgba(16, 185, 129, 0.4)"
             }}>
-              🌉
+              🟢
             </div>
             <h2 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#ffffff", marginTop: "0.75rem" }}>
-              Bifrost Enterprise Portal
+              AuraLLM Enterprise Portal
             </h2>
-            <p style={{ color: "#94a3b8", fontSize: "0.825rem", textAlign: "center" }}>
+            <p style={{ color: "#9ca3af", fontSize: "0.825rem", textAlign: "center" }}>
               Commercial-Grade, FinOps-Enforced AI Gateway Console
             </p>
           </div>
@@ -86,15 +86,15 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               <input
                 type="email"
                 className="input"
-                style={{ background: "rgba(15, 23, 42, 0.6)", border: "1px solid rgba(255,255,255,0.1)", color: "#ffffff" }}
+                style={{ background: "rgba(0, 0, 0, 0.6)", border: "1px solid rgba(255,255,255,0.1)", color: "#ffffff" }}
                 placeholder="e.g. admin@yourcompany.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={signingIn}
               />
-              <span style={{ fontSize: "0.7rem", color: "#94a3b8", marginTop: "0.3rem" }}>
-                💡 <strong>Demo Accounts:</strong> Use <code>admin@bifrost.ai</code> for Admin, <code>compliance@bifrost.ai</code> for Compliance, or any email for Developer.
+              <span style={{ fontSize: "0.7rem", color: "#9ca3af", marginTop: "0.3rem" }}>
+                💡 <strong>Demo Accounts:</strong> Use <code>admin@aurallm.com</code> for Admin, <code>compliance@aurallm.com</code> for Compliance, or any email for Developer.
               </span>
             </div>
 
@@ -105,9 +105,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                 width: "100%",
                 padding: "0.75rem",
                 fontWeight: 600,
-                background: "linear-gradient(135deg, var(--primary) 0%, #a855f7 100%)",
+                background: "linear-gradient(135deg, var(--primary) 0%, #059669 100%)",
                 border: "none",
-                boxShadow: "0 4px 6px -1px rgba(79, 70, 229, 0.2)"
+                boxShadow: "0 4px 6px -1px rgba(16, 185, 129, 0.2)"
               }}
               disabled={signingIn}
             >
